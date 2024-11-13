@@ -1,0 +1,17 @@
+{
+    "numberOfRequests": 1,
+    "url": "https://youtube.googleapis.com/youtube/v3/search?",
+    "method": "GET",
+    "params": {
+        "part":"snippet",
+        "key": "Your API key goes here",
+        "q": "YouTube Data API tutorials"
+    },
+    "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }, 
+    "body": {
+        "One": "one"
+    }
+}
