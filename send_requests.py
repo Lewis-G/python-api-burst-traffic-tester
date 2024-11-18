@@ -4,10 +4,27 @@ import time
 import json
 import os
 
+def create_request_args(config:dict):
+    
+    request_args = {
+        "method": config["method"],
+        "url": config["url"],
+        "headers": config["headers"],
+        "params": config["params"]
+    }
+
+    # Add 'json' argument only if the method is not GET
+    if config["method"].upper() != "GET" and "body" in config:
+        request_args["json"] = config["body"]
+    
+    # Add 'params' only if config.json 'parameters' is not empty
+    params = config.get("params", {})
+    if params:
+        request_args["params"] = params
+
 def send_request(config:dict):
     response = None
     try:
-        # Make the request with the specified HTTP method
         response = requests.request(method=config["method"], url=config["url"], headers=config["headers"], params=config["params"], json=config["body"])    
     except Exception as e:
         print(f"Request failed: {e}")
@@ -45,10 +62,6 @@ if __name__ == "__main__":
     with open(config_path, "r") as file:
         config = json.load(file)
     
-    # # Create an array, modify body values, so that each request is different
-    # request_data = []
-    # for i in range(config["numberOfRequests"]):
-    #     request_data.append(config)
-    #     request_data[i]["body"]["org name"] == f"Org number {i}"
+    request_args = create_request_args(config)
     
-    concurrent_requests(config)
+    concurrent_requests(request_args)
