@@ -1,5 +1,5 @@
 {
-    "numberOfRequests": 1,
+    "numberOfRequests": 5,
     "url": "https://youtube.googleapis.com/youtube/v3/search?",
     "method": "GET",
     "params": {
@@ -12,6 +12,6 @@
         "Content-Type": "application/json"
     }, 
     "body": {
-        "One": "one"
+        "key": "value"
     }
 }
